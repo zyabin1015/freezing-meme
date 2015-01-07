@@ -9,8 +9,6 @@
  
 using namespace std;
  
-static char cpu[30000];
- 
 int main(int argc, char **argv)
 {
  
@@ -23,16 +21,16 @@ int main(int argc, char **argv)
         acc.push_back(ch);
     }
     infile.close();
-    unsigned int j = 0;
+    char *j = new char[30000]; 
     int brc = 0;
     for(int i = 0; i < acc.size(); ++i)
     {
-        if(acc[i] == '>') j++;
-        if(acc[i] == '<') j--;
-        if(acc[i] == '+') cpu[j]++;
-        if(acc[i] == '-') cpu[j]--;
-        if(acc[i] == '.') cout << cpu[j];
-        if(acc[i] == ',') cin >> cpu[j];
+        if(acc[i] == '>') ++j;
+        if(acc[i] == '<') --j;
+        if(acc[i] == '+') ++*j;
+        if(acc[i] == '-') --*j;
+        if(acc[i] == '.') cout << *j;
+        if(acc[i] == ',') cin >> *j;
         if(acc[i] == '[')
         {
             if(!cpu[j])
